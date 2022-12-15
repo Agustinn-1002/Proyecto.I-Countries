@@ -6,19 +6,19 @@ module.exports = (sequelize) => {
   sequelize.define('activity', {
     nombre: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: false
     },
     dificultad: {
         type: DataTypes.ENUM('1','2','3','4','5'),
-        allowNull: false,
+        allowNull: false
     },
     duracion: {
         type: DataTypes.STRING,
-        allowNull: true
+        allowNull: false
     },
     temporada: {
-        type: DataTypes.ENUM('verano' , 'otoño' , 'invierno' , 'primavera'),
-        allowNull: false,
+        type: DataTypes.ENUM('summer' , 'autumn' , 'winter' , 'spring'),
+        allowNull: false
     }
   });
 };
