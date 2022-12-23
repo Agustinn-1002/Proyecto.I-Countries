@@ -1,14 +1,25 @@
 const initialState = {
-    getCountriesData: []
+    getAllCountriesData: [],
+    getCountry: [],
 }
 
 
 function rootReducer(state = initialState  , action) {
    switch (action.type) {
-    case 'GET-COUNTRY':
+    case 'GET-All-COUNTRIES':
         return {
            ...state,
-           getCountriesData: action.payload
+           getAllCountriesData: action.payload
+        }
+    case 'GET-COUNTRY-NAME':
+        return {
+          ...state,
+          getAllCountriesData: action.payload
+        }
+    case 'GET-COUNTRY-BY-ID':
+        return {
+         ...state,
+          getCountry: action.payload
         }
     default:
         return {

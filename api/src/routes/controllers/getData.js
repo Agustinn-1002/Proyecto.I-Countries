@@ -17,7 +17,7 @@ const getDataCountries = async (req, res) => {
             res.status(200).json(countries)
         }else{
             const dataByName = countries.filter(e => e.nombre.toLowerCase().includes(name.toLowerCase()))
-            dataByName.length?res.status(200).json(dataByName):res.status(404).json({"message": "Pais no Existente"})
+            dataByName.length?res.status(200).json(dataByName):res.json({"message": "Pais no Existente"})
         }
     } catch (error) {
         res.status(404).json({"message": error.message})

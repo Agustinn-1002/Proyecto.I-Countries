@@ -1,6 +1,11 @@
 import React, { useEffect } from 'react';
-import {useDispatch, useSelector} from 'react-redux'
+import {useDispatch} from 'react-redux'
 import { getCountries } from '../redux/actions';
+import Cards from './Cards';
+import Navbar from './Navbar';
+
+import {Routes,Route} from 'react-router-dom'
+import Card from './Card';
 
 const Home = () => {
     const dispatch = useDispatch();
@@ -9,21 +14,15 @@ const Home = () => {
         dispatch(getCountries())
     },[dispatch])
     
-    const data = useSelector(e=>e.getCountriesData)
 
   return (
     <div>
-        {
-            data.map(e=>
-                <div key={e.id}>
-                    <b>{e.nombre}</b>
-                    <b>{e.continente}</b>
-                    <b>{e.capital}</b>
-                    <b>{e.subRegion}</b>
-                    <hr></hr>
-                </div>
-            )
-        }
+        <Navbar/>
+        <Routes>
+            <Route path='/' element={<Cards/>}/>
+            <Route path='/details/:id' element={<Card/>}/>
+        </Routes>
+        
     </div>
   )
 }
