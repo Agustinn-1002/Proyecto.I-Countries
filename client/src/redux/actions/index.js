@@ -12,13 +12,11 @@ export function getCountries () {
     }}
 
 export function getCountriesByName (name) {
-    return async function (dispatch) {
-        const countrie = await axios.get(`${ruter}countries?name=${name}`);
-        return dispatch({
-            type: 'GET-COUNTRY-NAME',
-            payload:countrie.data
-        })
-    }}
+    return {
+        type: 'GET-COUNTRY-NAME',
+        payload: name
+    }    
+}
 
 export function getCountriesById (id) {
     return async function (dispatch){

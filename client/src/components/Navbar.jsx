@@ -3,7 +3,7 @@ import SearchBar from './SearchBar'
 
 import {useDispatch} from 'react-redux'
 import { getCountries } from '../redux/actions';
-import { Link , Route , Routes} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const styleDiv = {
     background: 'black',
@@ -16,10 +16,7 @@ const Navbar = () => {
   return (
     <div style={styleDiv}>
         <Link to='/home' onClick={()=> dispatch(getCountries())}>All Countries</Link>
-        <Routes>
-         <Route path='/' element={<SearchBar/>}/>
-          
-        </Routes>
+        <SearchBar/>
     </div>
   )
 }

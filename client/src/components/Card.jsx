@@ -11,7 +11,7 @@ const Card = () => {
 
     useEffect(()=>{
         dispatch(getCountriesById(id))
-    },[dispatch,id])
+    },[id,dispatch])
   return (
     <div>
         {

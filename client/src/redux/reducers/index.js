@@ -1,5 +1,6 @@
 const initialState = {
     getAllCountriesData: [],
+    countriesSearch: [],
     getCountry: [],
 }
 
@@ -9,12 +10,14 @@ function rootReducer(state = initialState  , action) {
     case 'GET-All-COUNTRIES':
         return {
            ...state,
-           getAllCountriesData: action.payload
+           getAllCountriesData: action.payload,
+           countriesSearch: []
         }
     case 'GET-COUNTRY-NAME':
+        let data = state.getAllCountriesData.filter(e=>e.nombre.toLowerCase().includes(action.payload.toLowerCase()))
         return {
           ...state,
-          getAllCountriesData: action.payload
+          countriesSearch:  data.length? data : {message:'Pais no Encontrado'}
         }
     case 'GET-COUNTRY-BY-ID':
         return {
