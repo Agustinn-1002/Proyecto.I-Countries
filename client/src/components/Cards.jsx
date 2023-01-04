@@ -1,6 +1,8 @@
+import { useState } from 'react'
 import {useSelector, useDispatch} from 'react-redux'
 import { Link } from 'react-router-dom'
 import { getCountriesById } from '../redux/actions'
+import Paginado from '../components/Paginado'
 
 const cards = {
   display: 'grid',
@@ -23,9 +25,22 @@ const Cards = () => {
     const data = useSelector(e=>e.getAllCountriesData)
     const dataSearch = useSelector(e=>e.countriesSearch)
 
+    const [pages , setPages] = useState(1)
+    const [elemetosPorPagina , setElementosPorPaginas] = useState(10)
+
+      // if (pages === 1) {
+      //   setElementosPorPaginas(9)
+      // }
+
+    const indexLastElement = pages * elemetosPorPagina;
+    const indexFirstElement = indexLastElement - elemetosPorPagina;
+    const currentElements = data.slice(indexFirstElement,indexLastElement)
+
     const dispatch = useDispatch()
     
     return (
+      <div>
+        <Paginado/>
         <div style={cards}>
           {
             (data.length && dataSearch.length === 0)?
@@ -51,6 +66,7 @@ const Cards = () => {
           }
           
         </div>
+      </div>
     )
  }
  
