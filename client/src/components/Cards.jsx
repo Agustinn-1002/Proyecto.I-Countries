@@ -24,7 +24,7 @@ const Cards = () => {
     const dataSearch = useSelector(e=>e.countriesSearch)
 
     const dispatch = useDispatch()
-
+    
     return (
         <div style={cards}>
           {

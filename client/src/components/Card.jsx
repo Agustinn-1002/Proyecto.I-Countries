@@ -8,7 +8,6 @@ const Card = () => {
     const dispatch = useDispatch()
     const {id} = useParams()
     const countriId = useSelector(e=>e.getCountry)
-
     useEffect(()=>{
         dispatch(getCountriesById(id))
     },[id,dispatch])
