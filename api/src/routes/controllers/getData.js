@@ -11,7 +11,8 @@ const getDataCountries = async (req, res) => {
                 through: {
                     attributes: []
                 }
-            }
+            },
+            order:[['nombre','ASC']]
         })
         if (!name) {
             res.status(200).json(countries)

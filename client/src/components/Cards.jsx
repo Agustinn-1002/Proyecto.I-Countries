@@ -54,7 +54,7 @@ const Cards = () => {
     
     return (
       <div>
-        <Paginado paginaAnterior={paginaAnterior} paginaSiguiente={paginaSiguiente} currentElements={currentElements} />
+        <Paginado paginaAnterior={paginaAnterior} paginaSiguiente={paginaSiguiente} data={data} dataSearch={dataSearch} currentElements={currentElements} currentElementsSearch={currentElementsSearch} />
         <div style={cards}>
           {
             (currentElements.length && dataSearch.length === 0)?
