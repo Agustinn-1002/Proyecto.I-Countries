@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import {useSelector, useDispatch} from 'react-redux'
 import { Link } from 'react-router-dom'
-import { getCountriesById } from '../redux/actions'
+import { getCountriesById, pageNumber } from '../redux/actions'
 import Paginado from '../components/Paginado'
 import { useEffect } from 'react'
 
@@ -27,8 +27,8 @@ const Cards = () => {
 
     const data = useSelector(e=>e.getAllCountriesData)
     const dataSearch = useSelector(e=>e.countriesSearch)
+    const pages = useSelector(e=>e.pages)
 
-    const [pages , setPages] = useState(1)
     const [elemetosPorPagina , setElementosPorPaginas] = useState(9)
     
     useEffect(()=>{
@@ -43,13 +43,13 @@ const Cards = () => {
     const indexLastElement = pages * elemetosPorPagina;
     const indexFirstElement = indexLastElement - elemetosPorPagina;
     const currentElements = data.slice(indexFirstElement,indexLastElement)
+    const currentElementsSearch = dataSearch.length && dataSearch.slice(indexFirstElement,indexLastElement)
     
     const paginaSiguiente = () => {
-      setPages(pages+1)
-      console.log(currentElements);
+      dispatch(pageNumber(pages+1));
     } 
     const paginaAnterior = () => {
-      setPages(pages-1)
+      dispatch(pageNumber(pages-1));
     } 
     
     return (
@@ -67,7 +67,7 @@ const Cards = () => {
                 </Link>
               )
             : dataSearch.length > 0 ? 
-              dataSearch.map((e,index)=>
+              currentElementsSearch.map((e,index)=>
                 <Link to={`/home/details/${e.id}`} key={index} style={card} onClick={()=>dispatch(getCountriesById(e.id))}>
                   <h3>{e.nombre}</h3>
                   <img src={e.flagImage} alt="" style={img}/>

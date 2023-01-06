@@ -27,3 +27,10 @@ export function getCountriesById (id) {
         })
     }
 }
+
+export function pageNumber (num) {
+    return {
+        type: 'PAGE-NUMBER',
+        payload: num
+    }
+}

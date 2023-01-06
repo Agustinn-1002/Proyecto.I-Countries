@@ -2,6 +2,7 @@ const initialState = {
     getAllCountriesData: [],
     countriesSearch: [],
     getCountry: [],
+    pages:1
 }
 
 
@@ -23,6 +24,11 @@ function rootReducer(state = initialState  , action) {
         return {
          ...state,
           getCountry: action.payload
+        }
+    case 'PAGE-NUMBER':
+        return {
+            ...state,
+            pages: action.payload
         }
     default:
         return {

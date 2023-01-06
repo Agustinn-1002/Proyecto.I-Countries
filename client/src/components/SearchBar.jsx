@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import {useDispatch} from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { getCountriesByName } from '../redux/actions'
+import { getCountriesByName, pageNumber } from '../redux/actions'
 
 
 const SearchBar = () => {
@@ -16,6 +16,7 @@ const SearchBar = () => {
         dispatch(getCountriesByName(name))
         setError('')
         setName('')
+        dispatch(pageNumber(1))
         navigate('/home')
     }
   return (
