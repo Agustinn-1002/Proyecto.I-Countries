@@ -78,6 +78,8 @@ const Cards = () => {
               :
               <h3>{dataSearch.message}</h3>
           }
+        <Paginado paginaAnterior={paginaAnterior} paginaSiguiente={paginaSiguiente} data={data} dataSearch={dataSearch} currentElements={currentElements} currentElementsSearch={currentElementsSearch} />
+
         </div>
       </div>
     )

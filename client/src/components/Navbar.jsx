@@ -18,7 +18,7 @@ const Navbar = () => {
         <Link to='/home' onClick={()=> {
           dispatch(getCountries())
           dispatch(pageNumber(1))
-          }}>All Countries</Link>
+          }}>Reset</Link>
         <SearchBar/>
     </div>
   )

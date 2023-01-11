@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+
 
 const paginado = ({paginaAnterior,paginaSiguiente,dataSearch,data,currentElements,currentElementsSearch}) => {
   const margen = {
@@ -12,24 +13,26 @@ const paginado = ({paginaAnterior,paginaSiguiente,dataSearch,data,currentElement
     padding:'4px',
     background:'#2c2c2c81',
     color:'#fff',
-    cursor:'default'
+    cursor:'default',
+    display:'inline',
   }
   let datos = data && data.map(e=>e.nombre)
-  let elementosPorPagina = currentElements && currentElements.map(e=>e.nombre)
+  let elementosPorPagina = currentElements.length && currentElements.map(e=>e.nombre)
 
   let datosSearch = dataSearch.length && dataSearch.map(e=>e.nombre)
-  let elementosSearch = currentElementsSearch.length  && currentElementsSearch.map(e=>e.nombre)
+  let elementosSearchPorPagina = currentElementsSearch  && currentElementsSearch.map(e=>e.nombre)
 
-  
   return (
-    // VALIDAR CUANDO EL ARRAY del search ESTA VACIO PARA DESABILITAR LOS BOTONES
     <div>
-      <ul>
-        { 
-          datos[0] === elementosPorPagina[0] ? <a style={disable} href='#'>Anterior</a> : <a style={margen} href='#' onClick={()=>paginaAnterior()}>Anterior</a>
-        }
+      <ul>  
         {
-          datos[data.length-1] === elementosPorPagina[currentElements.length-1] ? <a style={disable} href='#'>Siguiente</a> : <a style={margen} href='#' onClick={()=>paginaSiguiente()}>Siguiente</a>
+          datos[0] === elementosPorPagina[0] ? <div style={disable}>Anterior</div> : <a style={margen} href='#' onClick={()=>paginaAnterior()}>Anterior</a>
+        } 
+        { 
+          (dataSearch.length > 0)?       
+            (datosSearch[datosSearch.length-1] === elementosSearchPorPagina[currentElementsSearch.length-1]) ? <div style={disable}>Siguiente</div> : <a style={margen} href='#' onClick={()=>paginaSiguiente()}>Siguiente</a> 
+          :
+            (elementosSearchPorPagina === undefined) ||  (datos[data.length-1] === elementosPorPagina[currentElements.length-1]) ? <div style={disable}>Siguiente</div> : <a style={margen} href='#' onClick={()=>paginaSiguiente()}>Siguiente</a>
         }
       </ul>
     </div>
