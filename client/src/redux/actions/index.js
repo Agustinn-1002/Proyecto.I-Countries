@@ -34,3 +34,10 @@ export function pageNumber (num) {
         payload: num
     }
 }
+
+export function textSearch (search) {
+    return {
+        type: 'TEXT-SEARCH',
+        payload: search
+    }
+}

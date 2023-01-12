@@ -28,6 +28,7 @@ const Cards = () => {
     const data = useSelector(e=>e.getAllCountriesData)
     const dataSearch = useSelector(e=>e.countriesSearch)
     const pages = useSelector(e=>e.pages)
+    const searchText = useSelector(e=>e.textSearch)
 
     const [elemetosPorPagina , setElementosPorPaginas] = useState(9)
     
@@ -55,6 +56,7 @@ const Cards = () => {
     return (
       <div>
         <Paginado paginaAnterior={paginaAnterior} paginaSiguiente={paginaSiguiente} data={data} dataSearch={dataSearch} currentElements={currentElements} currentElementsSearch={currentElementsSearch} />
+        {dataSearch.length > 0? <p>Busqueda: <b>{searchText}</b></p> : null} 
         <div style={cards}>
           {
             (currentElements.length && dataSearch.length === 0)?

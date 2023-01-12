@@ -2,7 +2,8 @@ const initialState = {
     getAllCountriesData: [],
     countriesSearch: [],
     getCountry: [],
-    pages:1
+    pages:1,
+    textSearch: undefined,
 }
 
 
@@ -29,6 +30,12 @@ function rootReducer(state = initialState  , action) {
         return {
             ...state,
             pages: action.payload
+        }
+    case 'TEXT-SEARCH': 
+        return{
+            ...state,
+            textSearch: action.payload
+
         }
     default:
         return {
