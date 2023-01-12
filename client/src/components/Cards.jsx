@@ -66,6 +66,7 @@ const Cards = () => {
                   <img src={e.flagImage} alt="" style={img}/>
                   <p>{e.continente}</p>
                   <p>{e.capital}</p>
+                  <p>{e.poblacion}</p>
                 </Link>
               )
             : dataSearch.length > 0 ? 

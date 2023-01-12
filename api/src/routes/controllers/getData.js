@@ -3,6 +3,10 @@ const {Country, Activity} = require('../../db')
 const getDataCountries = async (req, res) => {
     try {  
         const {name} = req.query;
+
+        let orderName = req.query.orderName || 'nombre'
+        let orderType = req.query.order || 'asc'
+
         const countries = await Country.findAll({
             attributes: ["id", "nombre", "flagImage", "continente", "poblacion", "capital", "subRegion", "area"],
             include:{
@@ -12,7 +16,7 @@ const getDataCountries = async (req, res) => {
                     attributes: []
                 }
             },
-            order:[['nombre','ASC']]
+            order:[[orderName.toLowerCase() , orderType.toUpperCase()]]
         })
         if (!name) {
             res.status(200).json(countries)

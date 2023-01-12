@@ -4,6 +4,8 @@ const initialState = {
     getCountry: [],
     pages:1,
     textSearch: undefined,
+    nameFilter: "nombre",
+    typeFilter: "asc",
 }
 
 
@@ -13,7 +15,16 @@ function rootReducer(state = initialState  , action) {
         return {
            ...state,
            getAllCountriesData: action.payload,
-           countriesSearch: []
+           countriesSearch: [],
+           nameFilter: "nombre",
+           typeFilter: "asc"
+        }
+    case 'GET-ORDER-COUNTRIES':
+        return {
+            ...state,
+           getAllCountriesData: action.payload,
+           nameFilter: action.data.name,
+           typeFilter: action.data.type
         }
     case 'GET-COUNTRY-NAME':
         let data = state.getAllCountriesData.filter(e=>e.nombre.toLowerCase().includes(action.payload.toLowerCase()))
