@@ -11,18 +11,25 @@ export function getCountries () {
         })
     }}
 
-    export function getCountriesByOrder (name='nombre',type='asc') {
-        return async function (dispatch) {
-            const countriesOrder = await axios.get(`${ruter}countries?orderName=${name}&order=${type}`);
-            return dispatch({
-                type: 'GET-ORDER-COUNTRIES',
-                payload:countriesOrder.data,
-                data: {
-                    name,
-                    type
-                }
-            })
-        }}   
+export function getCountriesByOrder (name='nombre',type='asc') {
+    return async function (dispatch) {
+        const countriesOrder = await axios.get(`${ruter}countries?orderName=${name}&order=${type}`);
+        return dispatch({
+            type: 'GET-ORDER-COUNTRIES',
+            payload:countriesOrder.data,
+            data: {
+                name,
+                type
+            }
+        })
+    }}   
+
+export function orderByContinent(continent = null) {
+    return{
+        type:'ORDER-BY-CONTINENT',
+        payload: continent
+    }
+}
 
 export function getCountriesByName (name) {
     return {

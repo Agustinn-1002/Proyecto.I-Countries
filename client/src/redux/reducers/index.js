@@ -1,5 +1,6 @@
 const initialState = {
     getAllCountriesData: [],
+    getAllCountriesDataRespaldo: [],
     countriesSearch: [],
     getCountry: [],
     pages:1,
@@ -15,6 +16,7 @@ function rootReducer(state = initialState  , action) {
         return {
            ...state,
            getAllCountriesData: action.payload,
+           getAllCountriesDataRespaldo:action.payload,
            countriesSearch: [],
            nameFilter: "nombre",
            typeFilter: "asc"
@@ -37,9 +39,18 @@ function rootReducer(state = initialState  , action) {
             countriesSearch:[],
             nameFilter: action.data.name,
             typeFilter: action.data.type
-        } 
-        
-        
+        }  
+    case 'ORDER-BY-CONTINENT':
+        if(action.payload === null || action.payload === 'All'){
+            return{
+                ...state,
+                getAllCountriesData: state.getAllCountriesDataRespaldo
+            }
+        }
+        return{
+            ...state,
+            getAllCountriesData: state.getAllCountriesData.filter(e=>e.continente.toLowerCase() === action.payload.toLowerCase())
+        }
     case 'GET-COUNTRY-NAME':
         let data = state.getAllCountriesData.filter(e=>e.nombre.toLowerCase().includes(action.payload.toLowerCase()))
         return {
