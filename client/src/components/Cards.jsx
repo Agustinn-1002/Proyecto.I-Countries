@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { getCountriesById, pageNumber } from '../redux/actions'
 import Paginado from '../components/Paginado'
 import { useEffect } from 'react'
+import Filters from './Filters'
 
 const cards = {
   display: 'grid',
@@ -55,6 +56,7 @@ const Cards = () => {
     
     return (
       <div>
+        <Filters/>
         <Paginado paginaAnterior={paginaAnterior} paginaSiguiente={paginaSiguiente} data={data} dataSearch={dataSearch} currentElements={currentElements} currentElementsSearch={currentElementsSearch} />
         {dataSearch.length > 0? <p>Busqueda: <b>{searchText}</b></p> : null} 
         <div style={cards}>
@@ -76,6 +78,7 @@ const Cards = () => {
                   <img src={e.flagImage} alt="" style={img}/>
                   <p>{e.continente}</p>
                   <p>{e.capital}</p>
+                  <p>{e.poblacion}</p>
                 </Link>
               )
               :

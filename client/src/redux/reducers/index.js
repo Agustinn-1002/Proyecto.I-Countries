@@ -20,12 +20,26 @@ function rootReducer(state = initialState  , action) {
            typeFilter: "asc"
         }
     case 'GET-ORDER-COUNTRIES':
+        let apidata = action.payload;
+        let datos;
+        if (state.countriesSearch.length > 0) {
+            datos = apidata.filter(e=>e.nombre.toLowerCase().includes(state.textSearch.toLowerCase()))
+            return{
+                ...state,
+                countriesSearch: datos,
+                nameFilter: action.data.name,
+                typeFilter: action.data.type
+            }
+        }
         return {
             ...state,
-           getAllCountriesData: action.payload,
-           nameFilter: action.data.name,
-           typeFilter: action.data.type
-        }
+            getAllCountriesData: apidata,
+            countriesSearch:[],
+            nameFilter: action.data.name,
+            typeFilter: action.data.type
+        } 
+        
+        
     case 'GET-COUNTRY-NAME':
         let data = state.getAllCountriesData.filter(e=>e.nombre.toLowerCase().includes(action.payload.toLowerCase()))
         return {

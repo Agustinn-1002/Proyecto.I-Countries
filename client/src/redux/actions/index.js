@@ -11,7 +11,7 @@ export function getCountries () {
         })
     }}
 
-    export function getCountriesByOrder (name,type) {
+    export function getCountriesByOrder (name='nombre',type='asc') {
         return async function (dispatch) {
             const countriesOrder = await axios.get(`${ruter}countries?orderName=${name}&order=${type}`);
             return dispatch({

@@ -2,7 +2,7 @@ import React from 'react'
 import SearchBar from './SearchBar'
 
 import {useDispatch} from 'react-redux'
-import { getCountries, pageNumber } from '../redux/actions';
+import { getCountries, getCountriesByOrder, pageNumber } from '../redux/actions';
 import { Link } from 'react-router-dom';
 
 const styleDiv = {
@@ -18,6 +18,7 @@ const Navbar = () => {
         <Link to='/home' onClick={()=> {
           dispatch(getCountries())
           dispatch(pageNumber(1))
+          dispatch(getCountriesByOrder('nombre','asc'))
           }}>Reset</Link>
         <SearchBar/>
     </div>
