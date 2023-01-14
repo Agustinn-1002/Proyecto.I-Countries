@@ -1,4 +1,5 @@
 import React from 'react'
+import { useEffect } from 'react'
 import { useDispatch,useSelector } from 'react-redux'
 import { getCountriesByOrder, orderByContinent } from '../redux/actions'
 
@@ -15,9 +16,28 @@ const Filters = () => {
 
   const name = useSelector(e=>e.nameFilter)
   const type = useSelector(e=>e.typeFilter)
+  const countries = useSelector(e=>e.getAllCountriesDataRespaldo)
+  const search = useSelector(e=>e.countriesSearchRespaldo)
 
-  const continentes = ['All','South America','North America','Africa','Antarctica','Asia','Europe','Oceania']
+  let continentes = ['All']
+  let newContinentes = []
+
+  let arrayCountriesContinent = countries.map(e=>e.continente)
+  let arraySearchContinent = search.length && search.map(e=>e.continente)
+
+  let newArrayContinent = []
+
+  if (search.length > 0) {
+    newArrayContinent = arraySearchContinent.filter((e,i)=>{
+      return arraySearchContinent.indexOf(e) === i;
+    })
+  }else{
+    newArrayContinent = arrayCountriesContinent.filter((e,i)=>{
+      return arrayCountriesContinent.indexOf(e) === i;
+    })
+  }
   
+  newContinentes = continentes.concat(newArrayContinent)
   const handleChange = (e) => {
     dispatch(orderByContinent(e.target.value))
   }
@@ -32,9 +52,11 @@ const Filters = () => {
       </div>
       <label>Continente: </label>
       <select name="select" onChange={handleChange}>
-        {continentes.map((e)=>
+        {
+        newContinentes.map((e)=>
           <option value={e}>{e}</option>
-          )}
+          )
+        }
       </select>
     </>
   )

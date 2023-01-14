@@ -2,6 +2,7 @@ const initialState = {
     getAllCountriesData: [],
     getAllCountriesDataRespaldo: [],
     countriesSearch: [],
+    countriesSearchRespaldo: [],
     getCountry: [],
     pages:1,
     textSearch: undefined,
@@ -18,6 +19,8 @@ function rootReducer(state = initialState  , action) {
            getAllCountriesData: action.payload,
            getAllCountriesDataRespaldo:action.payload,
            countriesSearch: [],
+           countriesSearchRespaldo: [],
+           textSearch: undefined,
            nameFilter: "nombre",
            typeFilter: "asc"
         }
@@ -44,18 +47,31 @@ function rootReducer(state = initialState  , action) {
         if(action.payload === null || action.payload === 'All'){
             return{
                 ...state,
-                getAllCountriesData: state.getAllCountriesDataRespaldo
+                pages: 1,
+                getAllCountriesData: state.getAllCountriesDataRespaldo,
+                countriesSearch:[],
+                countriesSearchRespaldo: [],
             }
         }
+        if (state.countriesSearch.length > 0) {
+            let data = state.countriesSearchRespaldo.filter(e=>e.continente.toLowerCase() === action.payload.toLowerCase())
+            return{
+                ...state,
+                pages: 1,
+                countriesSearch: data
+            }
+        }else{
         return{
             ...state,
-            getAllCountriesData: state.getAllCountriesData.filter(e=>e.continente.toLowerCase() === action.payload.toLowerCase())
-        }
+            pages: 1,
+            getAllCountriesData: state.getAllCountriesDataRespaldo.filter(e=>e.continente.toLowerCase() === action.payload.toLowerCase())
+        }}
     case 'GET-COUNTRY-NAME':
         let data = state.getAllCountriesData.filter(e=>e.nombre.toLowerCase().includes(action.payload.toLowerCase()))
         return {
           ...state,
-          countriesSearch:  data.length? data : {message:'Pais no Encontrado'}
+          countriesSearch:  data.length? data : {message:'Pais no Encontrado'},
+          countriesSearchRespaldo: data.length? data : {message:'Pais no Encontrado'}
         }
     case 'GET-COUNTRY-BY-ID':
         return {
