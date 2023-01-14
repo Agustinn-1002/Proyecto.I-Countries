@@ -18,9 +18,9 @@ const Filters = () => {
   const type = useSelector(e=>e.typeFilter)
   const countries = useSelector(e=>e.getAllCountriesDataRespaldo)
   const search = useSelector(e=>e.countriesSearchRespaldo)
+  const allReset = useSelector(e=>e.allContinentReset)
 
-  let continentes = ['All']
-  let newContinentes = []
+  let continentes = []
 
   let arrayCountriesContinent = countries.map(e=>e.continente)
   let arraySearchContinent = search.length && search.map(e=>e.continente)
@@ -36,8 +36,9 @@ const Filters = () => {
       return arrayCountriesContinent.indexOf(e) === i;
     })
   }
-  
-  newContinentes = continentes.concat(newArrayContinent)
+  for (const i of newArrayContinent) { 
+    continentes.push(i)
+  }
   const handleChange = (e) => {
     dispatch(orderByContinent(e.target.value))
   }
@@ -53,7 +54,11 @@ const Filters = () => {
       <label>Continente: </label>
       <select name="select" onChange={handleChange}>
         {
-        newContinentes.map((e)=>
+          allReset?<option value='All'>All</option>:<option value='All' selected>All</option>
+        }
+
+        {
+        continentes.map((e)=>
           <option value={e}>{e}</option>
           )
         }

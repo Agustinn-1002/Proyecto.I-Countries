@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import {useDispatch} from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { getCountriesByName, pageNumber, textSearch } from '../redux/actions'
+import { getCountriesByName, orderByContinent, pageNumber, textSearch } from '../redux/actions'
 
 
 const SearchBar = () => {

@@ -21,6 +21,7 @@ const Navbar = () => {
           dispatch(getCountriesByOrder('nombre','asc'))
           }}>Reset</Link>
         <SearchBar/>
+        <Link to='/createActivity'>Crear Actividades</Link>
     </div>
   )
 }

@@ -8,6 +8,7 @@ const initialState = {
     textSearch: undefined,
     nameFilter: "nombre",
     typeFilter: "asc",
+    allContinentReset: false,
 }
 
 
@@ -22,7 +23,8 @@ function rootReducer(state = initialState  , action) {
            countriesSearchRespaldo: [],
            textSearch: undefined,
            nameFilter: "nombre",
-           typeFilter: "asc"
+           typeFilter: "asc",
+           allContinentReset: false
         }
     case 'GET-ORDER-COUNTRIES':
         let apidata = action.payload;
@@ -45,6 +47,13 @@ function rootReducer(state = initialState  , action) {
         }  
     case 'ORDER-BY-CONTINENT':
         if(action.payload === null || action.payload === 'All'){
+            if (state.countriesSearch.length > 0) {
+                return{
+                    ...state,
+                    pages: 1,
+                    countriesSearch: state.countriesSearchRespaldo,
+                }
+            }
             return{
                 ...state,
                 pages: 1,
@@ -58,12 +67,14 @@ function rootReducer(state = initialState  , action) {
             return{
                 ...state,
                 pages: 1,
-                countriesSearch: data
+                countriesSearch: data,
+                allContinentReset: true
             }
         }else{
         return{
             ...state,
             pages: 1,
+            allContinentReset: true,
             getAllCountriesData: state.getAllCountriesDataRespaldo.filter(e=>e.continente.toLowerCase() === action.payload.toLowerCase())
         }}
     case 'GET-COUNTRY-NAME':
@@ -71,7 +82,7 @@ function rootReducer(state = initialState  , action) {
         return {
           ...state,
           countriesSearch:  data.length? data : {message:'Pais no Encontrado'},
-          countriesSearchRespaldo: data.length? data : {message:'Pais no Encontrado'}
+          countriesSearchRespaldo: data.length? data : {message:'Pais no Encontrado'},
         }
     case 'GET-COUNTRY-BY-ID':
         return {
